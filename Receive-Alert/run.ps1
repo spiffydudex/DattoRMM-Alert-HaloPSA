@@ -105,7 +105,8 @@ if ($Email) {
         inventory_number = $HaloDevice.did
         details_html     = $HtmlBody
         gfialerttype     = $AlertID
-        DattoAlertState = 0
+        DattoAlertState  = 0
+        id               = $null
         site_id          = $HaloDevice.dsite
         assets           = @(@{id = $HaloDevice.did })
         priority_id      = $HaloPriority
