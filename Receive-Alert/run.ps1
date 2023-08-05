@@ -1,9 +1,11 @@
 using namespace System.Net
 
 # Input bindings are passed in via param block.
-param($Request, $TriggerMetadata)
+# param($Request, $TriggerMetadata)
+param([Object]$Request, $TriggerMetadata)
 
 Write-Host "Processing Webhook for Alert $($Request.Body.alertUID)"
+Write-Host "Processing JSON $Request.Body"
 
 $HaloClientID = $env:HaloClientID
 $HaloClientSecret = $env:HaloClientSecret
@@ -35,7 +37,7 @@ $PriorityHaloMap = @{
     "Information" = "4"
 }
 
-$AlertWebhook = $Request.Body | convertfrom-json -depth 100
+$AlertWebhook = $Request.Body #| convertfrom-json -depth 100
 
 
 $Email = Get-AlertEmailBody -AlertWebhook $AlertWebhook
@@ -152,8 +154,12 @@ if ($Email) {
     } 
 
 
-     
+    Write-Host("Halo Ticket")
+    $HaloTicketCreate
     $Ticket = New-HaloTicket -Ticket $HaloTicketCreate
+
+    Write-Host("Ticket Data")
+    $Ticket
 
     $ActionUpdate = @{
         id                = 1
