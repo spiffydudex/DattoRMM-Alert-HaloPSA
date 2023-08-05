@@ -120,36 +120,36 @@ if ($Email) {
 
 
     # Handle reoccurring alerts
-#    if ($ReoccuringAlerts) {        
-#        $ReoccuringAlertParent = $ReoccuringAlerts | Sort-Object FaultID | Select-Object -First 1
-#                
-#        if ($ReoccuringAlertParent.ParentID) {
-#            $ParentID = $ReoccuringAlertParent.ParentID
-#        } else {
-#            $ParentID = $ReoccuringAlertParent.FaultID
-#        }
-#        
-#        $RecurringUpdate = @{
-#            id        = $ParentID
-#            status_id = $HaloReocurringStatus   
-#        }
-#
-#        $null = Set-HaloTicket -Ticket $RecurringUpdate
-#
-#        $HaloTicketCreate.add('parent_id', $ParentID)
-#        
-#    } elseif ($RelatedAlerts) {
-#        $RelatedAlertsParent = $RelatedAlerts | Sort-Object FaultID | Select-Object -First 1
-#
-#        if ($RelatedAlertsParent.RelatedID -ne 0) {
-#            $CreatedFromID = $RelatedAlertsParent.RelatedID
-#        } else {
-#            $CreatedFromID = $RelatedAlertsParent.FaultID
-#        }
-#        
-#       $HaloTicketCreate.add('createdfrom_id', $CreatedFromID)
-#
-#    } 
+    if ($ReoccuringAlerts) {        
+        $ReoccuringAlertParent = $ReoccuringAlerts | Sort-Object FaultID | Select-Object -First 1
+                
+        if ($ReoccuringAlertParent.ParentID) {
+            $ParentID = $ReoccuringAlertParent.ParentID
+        } else {
+            $ParentID = $ReoccuringAlertParent.FaultID
+        }
+        
+        $RecurringUpdate = @{
+            id        = $ParentID
+            status_id = $HaloReocurringStatus   
+        }
+
+        $null = Set-HaloTicket -Ticket $RecurringUpdate
+
+        $HaloTicketCreate.add('parent_id', $ParentID)
+        
+    } elseif ($RelatedAlerts) {
+        $RelatedAlertsParent = $RelatedAlerts | Sort-Object FaultID | Select-Object -First 1
+
+        if ($RelatedAlertsParent.RelatedID -ne 0) {
+            $CreatedFromID = $RelatedAlertsParent.RelatedID
+        } else {
+            $CreatedFromID = $RelatedAlertsParent.FaultID
+        }
+        
+       $HaloTicketCreate.add('createdfrom_id', $CreatedFromID)
+
+    } 
 
 
      
