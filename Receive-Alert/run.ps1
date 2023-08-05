@@ -102,7 +102,6 @@ if ($Email) {
     $HaloPriority = $PriorityHaloMap."$($Alert.Priority)"
 
     $HaloTicketCreate = @{
-        id               = 
         summary          = $TicketSubject
         tickettype_id    = $HaloTicketType
         inventory_number = $HaloDevice.did
